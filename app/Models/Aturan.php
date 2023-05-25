@@ -40,4 +40,9 @@ class Aturan extends Model
     {
         return $this->belongsTo(Gejala::class, 'daftargejala', 'id');
     }
+    
+    public function manyGejala()
+    {
+        return $this->hasMany(Gejala::class, 'id', 'daftargejala');
+    }
 }

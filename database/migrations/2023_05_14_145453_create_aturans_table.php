@@ -17,7 +17,7 @@ class CreateAturansTable extends Migration
             $table->id();
             $table->integer('id_penyakit');
             // $table->string('namapenyakit');
-            $table->json('daftargejala');
+            $table->string('daftargejala');
             $table->timestamps();
         });
     }

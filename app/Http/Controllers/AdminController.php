@@ -37,7 +37,7 @@ class AdminController extends Controller
         $penyakit = Penyakit::count();
         $gejala = Gejala::count();
         $jam = Carbon::now()->format('H:i');
-        return view('admin.dashboard', compact('user', 'penyakit', 'gejala','jam'));
+        return view('admin.dashboard', compact('user', 'penyakit', 'gejala', 'jam'));
     }
 
     public function pengguna()
@@ -61,7 +61,7 @@ class AdminController extends Controller
         $data = User::find($id)->update([
             'password' => bcrypt('password')
         ]);
-        
+
         Alert::success('Reset', 'Data pasien berhasil direset password');
         return redirect()->route('pengguna');
     }
@@ -175,17 +175,21 @@ class AdminController extends Controller
 
     public function insertaturan(Request $request)
     {
-        $data = Aturan::create([
-            'id_penyakit' => $request->input('id_penyakit'),
-            // 'namapenyakit' => $request->input('namapenyakit'),
-            'daftargejala' => $request->input('daftargejala'),
-        ]);
+        if (!empty($request->input('daftargejala'))) {
+            $data = Aturan::create([
+                'id_penyakit' => $request->input('id_penyakit'),
+                // 'namapenyakit' => $request->input('namapenyakit'),
+                'daftargejala' => join(' - ', $request->input('daftargejala')),
+            ]);
+            // dd($data);
+        }
+
         return redirect()->route('aturan');
     }
     public function editaturan($id)
     {
         $data = Aturan::find($id);
-        
+
         $penyakit = Penyakit::all();
         $gejala = Gejala::all();
         return view('admin.dataaturan.edit', compact('data', 'penyakit', 'gejala'));

@@ -35,13 +35,16 @@
                                     <div class="form-group">
                                         <label>Penyakit</label>
                                         <select name="id_penyakit" class="form-control" required>
-                                            <option value="" disabled selected>Pilih</option>
+                                            <option value="" disabled>Pilih</option>
                                             @foreach ($penyakit as $row)
-                                                <option value="{{ $row->id }}">
-                                                    {{ $row->kodepenyakit . ' - ' . $row->namapenyakit }}</option>
+                                                <option value="{{ $row->id }}"
+                                                    @if ($row->id == $data->id_penyakit) selected @endif>
+                                                    {{ $row->kodepenyakit . ' - ' . $row->namapenyakit }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
+
                                     <div class="form-group">
                                         <label>Daftar Gejala</label>
                                         <div class="row">
@@ -54,7 +57,9 @@
                                                     @if ($index < $halfCount)
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="daftargejala" value="{{ $row->id }}">
+                                                                <input type="checkbox" name="daftargejala"
+                                                                    value="{{ $row->id }}"
+                                                                    @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
                                                                 {{ $row->namagejala }}
                                                             </label>
                                                         </div>
@@ -66,7 +71,9 @@
                                                     @if ($index >= $halfCount)
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="daftargejala" value="{{ $row->id }}">
+                                                                <input type="checkbox" name="daftargejala"
+                                                                    value="{{ $row->id }}"
+                                                                    @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
                                                                 {{ $row->namagejala }}
                                                             </label>
                                                         </div>

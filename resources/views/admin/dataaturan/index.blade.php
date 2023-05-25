@@ -47,11 +47,19 @@
                                     $nom = 1;
                                 @endphp
                                 @foreach ($data as $row)
+                                    @php
+                                        $daftarGejala = explode(' - ', $row->daftargejala);
+                                        $kodegejala = App\Models\Gejala::whereIn('id', $daftarGejala)
+                                            ->pluck('kodegejala')
+                                            ->toArray();
+                                    @endphp
                                     <tr>
                                         <th class="text-center">{{ $nom++ }}</th>
                                         <td class="text-center">{{ $row->penyakits->kodepenyakit }}</td>
                                         <td class="text-center">{{ $row->penyakits->namapenyakit }}</td>
-                                        <td class="text-center">{{ $row->gejalas->namagejala }}</td>
+                                        <td class="text-center">
+                                            {{ implode(' - ', $kodegejala) }}
+                                        </td>
                                         <td class="text-center">
                                             <div class="btn-group dropleft">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"
@@ -107,8 +115,9 @@
                                                         @if ($index < $halfCount)
                                                             <div class="checkbox">
                                                                 <label>
-                                                                    <input type="checkbox" name="daftargejala" value="{{ $row->id }}">
-                                                                    {{ $row->namagejala }}
+                                                                    <input type="checkbox" name="daftargejala[]"
+                                                                        value="{{ $row->id }}">
+                                                                    {{ $row->namagejala . ' (' . $row->kodegejala . ')' }}
                                                                 </label>
                                                             </div>
                                                         @endif
@@ -119,8 +128,9 @@
                                                         @if ($index >= $halfCount)
                                                             <div class="checkbox">
                                                                 <label>
-                                                                    <input type="checkbox" name="daftargejala" value="{{ $row->id }}">
-                                                                    {{ $row->namagejala }}
+                                                                    <input type="checkbox" name="daftargejala[]"
+                                                                        value="{{ $row->id }}">
+                                                                    {{ $row->namagejala . ' (' . $row->kodegejala . ')' }}
                                                                 </label>
                                                             </div>
                                                         @endif
@@ -128,7 +138,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Batal</button>
