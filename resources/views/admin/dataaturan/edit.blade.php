@@ -57,10 +57,10 @@
                                                     @if ($index < $halfCount)
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="daftargejala"
+                                                                <input type="checkbox" name="daftargejala[]"
                                                                     value="{{ $row->id }}"
                                                                     @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
-                                                                {{ $row->namagejala }}
+                                                                    {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                             </label>
                                                         </div>
                                                     @endif
@@ -71,10 +71,10 @@
                                                     @if ($index >= $halfCount)
                                                         <div class="checkbox">
                                                             <label>
-                                                                <input type="checkbox" name="daftargejala"
+                                                                <input type="checkbox" name="daftargejala[]"
                                                                     value="{{ $row->id }}"
                                                                     @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
-                                                                {{ $row->namagejala }}
+                                                                    {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                             </label>
                                                         </div>
                                                     @endif

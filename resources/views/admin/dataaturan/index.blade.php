@@ -69,10 +69,12 @@
                                                 <div class="dropdown-menu">
                                                     <a class="dropdown-item"
                                                         href="{{ route('editaturan', $row->id) }}">Edit</a>
-                                                    <button class="dropdown-item deletebtn" data-toggle="modal"
+                                                    {{-- <button class="dropdown-item deletebtn" data-toggle="modal"
                                                         data-target="#modal-delete">
                                                         Hapus
-                                                    </button>
+                                                    </button> --}}
+                                                    <a class="dropdown-item"
+                                                            href="{{ route('deleteaturan', $row->id) }}">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -117,7 +119,7 @@
                                                                 <label>
                                                                     <input type="checkbox" name="daftargejala[]"
                                                                         value="{{ $row->id }}">
-                                                                    {{ $row->namagejala . ' (' . $row->kodegejala . ')' }}
+                                                                        {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                                 </label>
                                                             </div>
                                                         @endif
@@ -130,7 +132,7 @@
                                                                 <label>
                                                                     <input type="checkbox" name="daftargejala[]"
                                                                         value="{{ $row->id }}">
-                                                                    {{ $row->namagejala . ' (' . $row->kodegejala . ')' }}
+                                                                    {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                                 </label>
                                                             </div>
                                                         @endif
@@ -158,12 +160,12 @@
                                     <div class="modal-content">
                                         <div class="modal-body mt-3">
                                             <p class="text-center">Apakah anda yakin ingin menghapus aturan
-                                                "{{ $row->daftargejala }}" ?</p>
+                                                "" ?</p>
                                         </div>
                                         <div class="text-center mb-2">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Batal</button>
-                                            <a href="{{ route('deletegejala', $row->id) }}"
+                                            <a href="{{ route('deleteaturan', $row->id) }}"
                                                 class="btn btn-danger">Hapus</a>
                                         </div>
                                     </div>

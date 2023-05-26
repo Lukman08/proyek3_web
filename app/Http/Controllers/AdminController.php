@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Aturan;
+use App\Models\Diagnosa;
 use App\Models\Gejala;
 use App\Models\Penyakit;
 use App\Models\User;
@@ -197,11 +198,22 @@ class AdminController extends Controller
 
     public function updateaturan(Request $request, $id)
     {
-        $data = Aturan::find($id);
-        $data->id_penyakit = $request->input('id_penyakit');
-        // $data->namapenyakit = $request->input('namapenyakit');
-        $data->daftargejala = $request->input('daftargejala');
-        $data->save();
+        if (!empty($request->input('daftargejala'))) {
+            $data = Aturan::find($id);
+            if ($data) {
+                $data->id_penyakit = $request->input('id_penyakit');
+                
+                $daftargejala = $request->input('daftargejala');
+                if (is_array($daftargejala)) {
+                    $daftargejala = join(' - ', $daftargejala);
+                }
+                
+                $data->daftargejala = $daftargejala;
+                $data->save();
+            }
+        }
+        
+        
         Alert::success('Update', 'Data aturan berhasil diupdate ');
         return redirect()->route('aturan');
     }
@@ -214,7 +226,8 @@ class AdminController extends Controller
 
     public function diagnosa()
     {
-        return view('admin.diagnosa.index');
+        $data = Diagnosa::all();
+        return view('admin.diagnosa.index', compact('data'));
     }
 
     public function konsultasi()

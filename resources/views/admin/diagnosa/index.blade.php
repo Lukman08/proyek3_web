@@ -35,23 +35,27 @@
                         <table id="data" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Pasien</th>
-                                    <th>Tanggal</th>
-                                    <th>Gejala</th>
-                                    <th>Hasil</th>
-                                    <th>Solusi</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Pasien</th>
+                                    <th class="text-center">Tanggal</th>
+                                    <th class="text-center">Gejala</th>
+                                    <th class="text-center">Hasil</th>
+                                    <th class="text-center">Solusi</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                $nom = 1;
+                            @endphp
+                            @foreach ($data as $row)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Herlambang</td>
-                                    <td>20/02/2023</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>............</td>
+                                    <th class="text-center">{{ $nom++ }}</th>
+                                    <td class="text-center">{{ $row->user_id }}</td>
+                                    <td class="text-center">{{ $row->created_at->format('d F Y') }}</td>
+                                    <td class="text-center">{{ $row->gejala }}</td>
+                                    <td class="text-center">{{ $row->hasil }}</td>
+                                    <td class="text-center">{{ $row->solusi }}</td>
                                     <td>
                                         <div class="btn-group dropleft">
                                             <button type="button" class="btn btn-primary dropdown-toggle"
@@ -65,86 +69,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Gozali Ahmad</td>
-                                    <td>20/02/2023</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>
-                                        <div class="btn-group dropleft">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                Menu
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Abdul Latief</td>
-                                    <td>22/02/2023</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>
-                                        <div class="btn-group dropleft">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                Menu
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Ruikh Khan</td>
-                                    <td>24/02/2023</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>
-                                        <div class="btn-group dropleft">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                Menu
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Asyarifullah</td>
-                                    <td>24/02/2023</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>............</td>
-                                    <td>
-                                        <div class="btn-group dropleft">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                Menu
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

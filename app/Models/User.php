@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -59,5 +60,18 @@ class User extends Authenticatable
             // $post->updated_by = auth()->user()->id ?? null;
             $post->updated_at =  DATE("Y-m-d H:i:s");
         });
+    }
+
+    public function diagnosa(){
+        return $this->hasMany(Diagnosa::class, 'user_id', 'id');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
