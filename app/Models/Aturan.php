@@ -21,13 +21,13 @@ class Aturan extends Model
             // $post->created_by = auth()->user()->id ?? null;
             $post->created_at = DATE("Y-m-d H:i:s");
             // $post->updated_by = auth()->user()->id ?? null;
-            $post->updated_at =  DATE("Y-m-d H:i:s");
+            $post->updated_at = DATE("Y-m-d H:i:s");
         });
 
         // Update an existing post
         static::updating(function ($post) {
             // $post->updated_by = auth()->user()->id ?? null;
-            $post->updated_at =  DATE("Y-m-d H:i:s");
+            $post->updated_at = DATE("Y-m-d H:i:s");
         });
     }
 
@@ -40,7 +40,7 @@ class Aturan extends Model
     {
         return $this->belongsTo(Gejala::class, 'daftargejala', 'id');
     }
-    
+
     public function manyGejala()
     {
         return $this->hasMany(Gejala::class, 'id', 'daftargejala');

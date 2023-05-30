@@ -26,8 +26,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a href="#" class="btn btn-outline-success">
-                            <i class="fa fa-plus-circle"></i>
+                        <button onclick="printTable()" class="btn btn-outline-secondary"><i
+                                class="fas fa-print"></i></button>
                         </a>
                     </div>
                     <!-- /.card-header -->
@@ -46,29 +46,24 @@
                             </thead>
                             <tbody>
                                 @php
-                                $nom = 1;
-                            @endphp
-                            @foreach ($data as $row)
-                                <tr>
-                                    <th class="text-center">{{ $nom++ }}</th>
-                                    <td class="text-center">{{ $row->user_id }}</td>
-                                    <td class="text-center">{{ $row->created_at->format('d F Y') }}</td>
-                                    <td class="text-center">{{ $row->gejala }}</td>
-                                    <td class="text-center">{{ $row->hasil }}</td>
-                                    <td class="text-center">{{ $row->solusi }}</td>
-                                    <td>
-                                        <div class="btn-group dropleft">
-                                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                                data-toggle="dropdown" aria-expanded="false">
-                                                Menu
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Hapus</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    $nom = 1;
+                                @endphp
+                                @foreach ($data as $row)
+                                    <tr>
+                                        <th class="text-center">{{ $nom++ }}</th>
+                                        <td class="text-center">{{ $row->user->name }}</td>
+                                        <td class="text-center">{{ $row->created_at->format('d F Y') }}</td>
+                                        <td class="text-center">
+                                            {{ str_replace(',', ' - ', str_replace('"', '', str_replace(str_split('[]'), '', $row->gejala))) }}
+                                        </td>
+                                        <td class="text-center">{{ $row->penyakits->namapenyakit }}</td>
+                                        <td class="text-center">{{ $row->solusi }}</td>
+                                        <td class="text-center">
+                                            <a href="#" class="btn btn-outline-info">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>

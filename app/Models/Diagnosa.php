@@ -21,16 +21,20 @@ class Diagnosa extends Model
             // $post->created_by = auth()->user()->id ?? null;
             $post->created_at = DATE("Y-m-d H:i:s");
             // $post->updated_by = auth()->user()->id ?? null;
-            $post->updated_at =  DATE("Y-m-d H:i:s");
+            $post->updated_at = DATE("Y-m-d H:i:s");
         });
 
         // Update an existing post
         static::updating(function ($post) {
             // $post->updated_by = auth()->user()->id ?? null;
-            $post->updated_at =  DATE("Y-m-d H:i:s");
+            $post->updated_at = DATE("Y-m-d H:i:s");
         });
     }
 
+    public function penyakits()
+    {
+        return $this->belongsTo(Penyakit::class, 'hasil', 'id');
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

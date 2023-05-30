@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('/auth')->group(function () {
-    
+
     Route::post('/register', [AuthController::class, 'register'])->name('api.auth.register');
     Route::post('/login', [AuthController::class, 'login'])->name('api.auth.login');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('api.auth.refresh');
@@ -25,3 +26,7 @@ Route::prefix('/auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('api.auth.logout');
     });
 });
+
+Route::get('/gejala', [ApiController::class, 'getGejala'])->name('gejala');
+Route::get('/resdiagnosa', [ApiController::class, 'resDiagnosa'])->name('resdiagnosa');
+Route::post('/diagnosa', [ApiController::class, 'diagnosa'])->name('diagnosa');

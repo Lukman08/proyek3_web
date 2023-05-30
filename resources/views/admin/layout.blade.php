@@ -116,6 +116,10 @@
         $(document).ready(function() {
             $('#data').DataTable();
         });
+
+        function printTable() {
+            window.print();
+        }
     </script>
 
 </body>

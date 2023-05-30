@@ -58,7 +58,8 @@
                                         <td class="text-center">{{ $row->penyakits->kodepenyakit }}</td>
                                         <td class="text-center">{{ $row->penyakits->namapenyakit }}</td>
                                         <td class="text-center">
-                                            {{ implode(' - ', $kodegejala) }}
+                                            {{-- {{ implode(' - ', $kodegejala) }} --}}
+                                            {{ $row->daftargejala }}
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group dropleft">
@@ -74,7 +75,7 @@
                                                         Hapus
                                                     </button> --}}
                                                     <a class="dropdown-item"
-                                                            href="{{ route('deleteaturan', $row->id) }}">Hapus</a>
+                                                        href="{{ route('deleteaturan', $row->id) }}">Hapus</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -118,8 +119,8 @@
                                                             <div class="checkbox">
                                                                 <label>
                                                                     <input type="checkbox" name="daftargejala[]"
-                                                                        value="{{ $row->id }}">
-                                                                        {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
+                                                                        value="{{ $row->kodegejala }}">
+                                                                    {{ '(' . $row->kodegejala . ') ' . $row->namagejala }}
                                                                 </label>
                                                             </div>
                                                         @endif
@@ -131,8 +132,8 @@
                                                             <div class="checkbox">
                                                                 <label>
                                                                     <input type="checkbox" name="daftargejala[]"
-                                                                        value="{{ $row->id }}">
-                                                                    {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
+                                                                        value="{{ $row->kodegejala }}">
+                                                                    {{ '(' . $row->kodegejala . ') ' . $row->namagejala }}
                                                                 </label>
                                                             </div>
                                                         @endif

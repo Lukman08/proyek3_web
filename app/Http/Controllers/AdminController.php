@@ -7,6 +7,7 @@ use App\Models\Diagnosa;
 use App\Models\Gejala;
 use App\Models\Penyakit;
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -202,18 +203,18 @@ class AdminController extends Controller
             $data = Aturan::find($id);
             if ($data) {
                 $data->id_penyakit = $request->input('id_penyakit');
-                
+
                 $daftargejala = $request->input('daftargejala');
                 if (is_array($daftargejala)) {
                     $daftargejala = join(' - ', $daftargejala);
                 }
-                
+
                 $data->daftargejala = $daftargejala;
                 $data->save();
             }
         }
-        
-        
+
+
         Alert::success('Update', 'Data aturan berhasil diupdate ');
         return redirect()->route('aturan');
     }
@@ -228,6 +229,13 @@ class AdminController extends Controller
     {
         $data = Diagnosa::all();
         return view('admin.diagnosa.index', compact('data'));
+    }
+    public function diagnosacetak()
+    {
+        $diagnosa = Diagnosa::all();
+ 
+    	// $pdf = PDF::loadview('pegawai_pdf',['diagnosa'=>$diagnosa]);
+    	// return $pdf->download('laporan-pegawai-pdf');
     }
 
     public function konsultasi()
