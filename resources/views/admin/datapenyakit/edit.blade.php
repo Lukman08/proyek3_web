@@ -46,6 +46,10 @@
                                         <label for="exampleFormControlTextarea1">Deskripsi</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3">{{ $data->deskripsi }}</textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Solusi</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" name="solusi" rows="3">{{ $data->solusi }}</textarea>
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">

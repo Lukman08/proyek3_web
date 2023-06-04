@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'hakakses:admin']], 
     Route::get('/deleteaturan/{id}', [AdminController::class, 'deleteaturan'])->name('deleteaturan');
 
     Route::get('/diagnosa', [AdminController::class, 'diagnosa'])->name('diagnosa');
+    Route::post('/insertdiagnosa', [AdminController::class, 'insertdiagnosa'])->name('insertdiagnosa');
     Route::get('/diagnosa/cetak_pdf', [AdminController::class, 'diagnosacetak'])->name('diagnosa.cetak');
     // Route::get('/konsultasi', [AdminController::class, 'konsultasi'])->name('konsultasi');
 });

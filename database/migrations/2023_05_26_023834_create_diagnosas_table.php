@@ -18,6 +18,7 @@ class CreateDiagnosasTable extends Migration
             $table->integer('user_id');
             $table->text('gejala');
             $table->text('hasil');
+            $table->text('deskripsi');
             $table->text('solusi');
             $table->timestamps();
         });

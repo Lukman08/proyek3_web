@@ -77,7 +77,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Diagnosa</span>
-                                <span class="info-box-number">12</span>
+                                <span class="info-box-number">{{ $diagnosa }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>

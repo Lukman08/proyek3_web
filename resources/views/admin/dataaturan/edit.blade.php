@@ -58,8 +58,8 @@
                                                         <div class="checkbox">
                                                             <label>
                                                                 <input type="checkbox" name="daftargejala[]"
-                                                                    value="{{ $row->id }}"
-                                                                    @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
+                                                                    value="{{ $row->kodegejala }}"
+                                                                    @if (in_array($row->kodegejala, explode(' - ', $data->daftargejala))) checked @endif>
                                                                     {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                             </label>
                                                         </div>
@@ -72,8 +72,8 @@
                                                         <div class="checkbox">
                                                             <label>
                                                                 <input type="checkbox" name="daftargejala[]"
-                                                                    value="{{ $row->id }}"
-                                                                    @if (in_array($row->id, explode(' - ', $data->daftargejala))) checked @endif>
+                                                                    value="{{ $row->kodegejala }}"
+                                                                    @if (in_array($row->kodegejala, explode(' - ', $data->daftargejala))) checked @endif>
                                                                     {{ '(' . $row->kodegejala . ') ' .  $row->namagejala  }}
                                                             </label>
                                                         </div>

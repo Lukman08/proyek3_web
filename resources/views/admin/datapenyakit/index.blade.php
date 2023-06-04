@@ -39,6 +39,7 @@
                                     <th class="text-center">Kode Penyakit</th>
                                     <th class="text-center">Nama Penyakit</th>
                                     <th class="text-center">Deskripsi</th>
+                                    <th class="text-center">Solusi</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -51,7 +52,8 @@
                                         <th class="text-center">{{ $nom++ }}</th>
                                         <td class="text-center">{{ $row->kodepenyakit }}</td>
                                         <td class="text-center">{{ $row->namapenyakit }}</td>
-                                        <td class="text-center">{{ $row->deskripsi }}</td>
+                                        <td>{{ Str::limit($row->deskripsi, 25) }}</td>
+                                        <td>{{ Str::limit($row->solusi, 25) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group dropleft">
                                                 <button type="button" class="btn btn-primary dropdown-toggle"
@@ -100,6 +102,10 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlTextarea1">Deskripsi</label>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" name="deskripsi" rows="3" required></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Solusi</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="solusi" rows="3" required></textarea>
                                         </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">

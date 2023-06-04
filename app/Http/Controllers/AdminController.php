@@ -38,13 +38,14 @@ class AdminController extends Controller
         $user = User::where('role', 'pasien')->count();
         $penyakit = Penyakit::count();
         $gejala = Gejala::count();
+        $diagnosa = Diagnosa::count();
         $jam = Carbon::now()->format('H:i');
-        return view('admin.dashboard', compact('user', 'penyakit', 'gejala', 'jam'));
+        return view('admin.dashboard', compact('user', 'penyakit', 'gejala', 'jam', 'diagnosa'));
     }
 
     public function pengguna()
     {
-        $data = User::where('role', 'pasien')->latest()->get();
+        $data = User::where('role', 'pasien')->all();
         return view('admin.datapengguna.index', compact('data'));
     }
     public function insertpengguna(Request $request)
@@ -76,7 +77,7 @@ class AdminController extends Controller
 
     public function penyakit()
     {
-        $data = Penyakit::latest()->get();
+        $data = Penyakit::all();
 
         $auto = DB::table('penyakits')->max('kodepenyakit');
         $urut = (int) substr($auto, 1, 3);
@@ -95,6 +96,7 @@ class AdminController extends Controller
             'kodepenyakit' => $request->input('kodepenyakit'),
             'namapenyakit' => $request->input('namapenyakit'),
             'deskripsi' => $request->input('deskripsi'),
+            'solusi' => $request->input('solusi'),
         ]);
         Alert::success('Tambah', 'Data penyakit berhasil ditambahkan ');
         return redirect()->route('penyakit');
@@ -111,6 +113,7 @@ class AdminController extends Controller
         $data->kodepenyakit = $request->input('kodepenyakit');
         $data->namapenyakit = $request->input('namapenyakit');
         $data->deskripsi = $request->input('deskripsi');
+        $data->solusi = $request->input('solusi');
         $data->save();
         Alert::success('Update', 'Data penyakit berhasil diupdate ');
         return redirect()->route('penyakit');
@@ -125,7 +128,7 @@ class AdminController extends Controller
 
     public function gejala()
     {
-        $data = Gejala::latest()->get();
+        $data = Gejala::all();
 
         $auto = DB::table('gejalas')->max('kodegejala');
         $urut = (int) substr($auto, 1, 3);
@@ -168,7 +171,7 @@ class AdminController extends Controller
 
     public function aturan()
     {
-        $data = Aturan::latest()->get();
+        $data = Aturan::all();
 
         $penyakit = Penyakit::all();
         $gejala = Gejala::all();
@@ -228,18 +231,69 @@ class AdminController extends Controller
     public function diagnosa()
     {
         $data = Diagnosa::all();
-        return view('admin.diagnosa.index', compact('data'));
+        $gejala = Gejala::all();
+        $user = User::where('role', 'pasien')->get();
+        return view('admin.diagnosa.index', compact('data', 'user', 'gejala'));
+    }
+    public function insertdiagnosa(Request $request)
+    {
+        $penyakit = Penyakit::all();
+        $user_id = $request->user_id;
+        $gejala = $request->gejala;
+        // dd($request->gejala);
+        $aturan = Aturan::all();
+        $data = [];
+        foreach ($aturan as $key => $atur) {
+            foreach ($gejala as $key => $gej) {
+                if (str_contains($atur->daftargejala, $gej)) {
+                    // dd($atur);
+                    array_push($data, [
+                        "idpenyakit" => $atur->id_penyakit,
+                        "gejala" => $gej
+                    ]);
+                }
+            }
+        }
+        $hasil = [];
+        foreach ($penyakit as $key => $peny) {
+            $jum = 0;
+            foreach ($data as $key => $dat) {
+                if ($peny->id == $dat['idpenyakit']) {
+                    $jum += 1;
+                }
+            }
+            array_push($hasil, [
+                'idpenyakit' => $peny->id,
+                'jum' => $jum
+            ]);
+        }
+
+        $dataPenyakit = array_reduce($hasil, function ($a, $b) {
+            return @$a['jum'] > $b['jum'] ? $a : $b;
+        });
+        $getpenyakit = Penyakit::where('id', $dataPenyakit['idpenyakit'])->first();
+
+        $store = Diagnosa::create([
+            "user_id" => $request->user_id,
+            "gejala" => json_encode($request->gejala),
+            "hasil" => $dataPenyakit["idpenyakit"],
+            "deskripsi" => $getpenyakit->deskripsi,
+            "solusi" => $getpenyakit->solusi,
+        ]);
+
+        Alert::success('Tambah', 'Diagnosa pasien berhasil ditambah');
+        return redirect()->route('diagnosa');
     }
     public function diagnosacetak()
     {
         $diagnosa = Diagnosa::all();
- 
-    	// $pdf = PDF::loadview('pegawai_pdf',['diagnosa'=>$diagnosa]);
-    	// return $pdf->download('laporan-pegawai-pdf');
+
+        // $pdf = PDF::loadview('pegawai_pdf',['diagnosa'=>$diagnosa]);
+        // return $pdf->download('laporan-pegawai-pdf');
     }
 
-    public function konsultasi()
-    {
-        return view('admin.konsultasi.index');
-    }
+    // public function konsultasi()
+    // {
+    //     return view('admin.konsultasi.index');
+    // }
 }

@@ -18,7 +18,7 @@ class CreatePenyakitsTable extends Migration
             $table->string('kodepenyakit');
             $table->string('namapenyakit');
             $table->text('deskripsi');
-            $table->text('solusi')->nullable();
+            $table->text('solusi');
             $table->timestamps();
         });
     }
