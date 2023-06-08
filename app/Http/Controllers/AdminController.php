@@ -44,10 +44,11 @@ class AdminController extends Controller
     }
 
     public function pengguna()
-    {
-        $data = User::where('role', 'pasien')->all();
-        return view('admin.datapengguna.index', compact('data'));
-    }
+{
+    $data = User::where('role', 'pasien')->get();
+    return view('admin.datapengguna.index', compact('data'));
+}
+
     public function insertpengguna(Request $request)
     {
         $data = User::create([

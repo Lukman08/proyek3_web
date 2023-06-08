@@ -86,6 +86,7 @@ class ApiController extends Controller
             "user_id" => $request->user_id,
             "gejala" => json_encode($request->gejala),
             "hasil" => $dataPenyakit["idpenyakit"],
+            "deskripsi" => $getpenyakit->deskripsi,
             "solusi" => $getpenyakit->solusi,
         ]);
 
